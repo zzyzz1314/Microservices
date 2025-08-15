@@ -1,0 +1,36 @@
+server:
+  port: 10030
+spring:
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    jedis:
+      pool:
+        max-wait: 2000ms
+        min-idle: 2
+        max-idle: 8
+  application:
+    name: service-user #服务名
+  datasource:
+    url: jdbc:mysql://ymcc-user?serverTimezone=UTC
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: fsp_tx_group #这里和file.conf中事务组名一样
+    nacos:
+    discovery:
+    server-addr: 127.0.0.1:8848
+  main:
+    allow-bean-definition-overriding: true
+mybatis-plus:
+  mapper-locations: classpath:cn/zwh/ymcc/mapper/*Mapper.xml
+  configuration: #mybatis-plus日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+seata:
+  enableAutoDataSourceProxy: false #关闭DataSource代理的自动配置，我们要手动配置

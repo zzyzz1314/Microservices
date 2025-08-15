@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-api/ymcc-api-system/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-api/ymcc-api-system/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-api/ymcc-api-uaa/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-api/ymcc-api-uaa/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-basic/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-basic/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-basic/ymcc-basic-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-basic/ymcc-basic-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-basic/ymcc-basic-dependency/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-basic/ymcc-basic-dependency/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-pojo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-pojo/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-pojo/ymcc-pojo-course/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-pojo/ymcc-pojo-system/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-pojo/ymcc-pojo-system/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-pojo/ymcc-pojo-uaa/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-pojo/ymcc-pojo-uaa/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-pojo/ymcc-pojo-user/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-pojo/ymcc-pojo-user/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-service/ymcc-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-service/ymcc-service-course/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-service/ymcc-service-system/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-service/ymcc-service-system/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-service/ymcc-service-uaa/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-service/ymcc-service-uaa/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-service/ymcc-service-user/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-service/ymcc-service-user/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-support/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-support/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-support/ymcc-service-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ymcc-support/ymcc-service-gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zwh-basic/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zwh-basic/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zwh-basic/zwh-basic-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zwh-basic/zwh-basic-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zwh-basic/zwh-gen-code/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zwh-basic/zwh-gen-code/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

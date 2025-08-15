@@ -1,0 +1,17 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
+  application:
+    name: service-uaa
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #注册中心
+      config:
+        server-addr: localhost:8848 #配置中心
+        file-extension: yaml #配置文件格式
+        prefix: application-uaa #配置前缀 ，默认使用sring.application.name
+        group: DEFAULT_GROUP
+        namespace: 97d11fab-3d1f-4e87-89ed-91093bf72ae3

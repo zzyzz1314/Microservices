@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="EasyCodeTableSetting">
+    <option name="tableInfoMap">
+      <map>
+        <entry key="day09_demo01.orders" value="eyJuYW1lIjoiT3JkZXJzIiwicHJlTmFtZSI6IiIsInRlbXBsYXRlR3JvdXBOYW1lIjoiTXliYXRpc1BsdXMiLCJmdWxsQ29sdW1uIjpbeyJuYW1lIjoiaWQiLCJ0eXBlIjoiamF2YS5sYW5nLkludGVnZXIiLCJjdXN0b20iOmZhbHNlLCJleHQiOiJ7fSJ9LHsibmFtZSI6InVzZXJJZCIsInR5cGUiOiJqYXZhLmxhbmcuSW50ZWdlciIsImN1c3RvbSI6ZmFsc2UsImV4dCI6Int9In0seyJuYW1lIjoib3JkZXJOYW1lIiwidHlwZSI6ImphdmEubGFuZy5TdHJpbmciLCJjdXN0b20iOmZhbHNlLCJleHQiOiJ7fSJ9LHsibmFtZSI6InByaWNlIiwidHlwZSI6ImphdmEubGFuZy5PYmplY3QiLCJjdXN0b20iOmZhbHNlLCJleHQiOiJ7fSJ9XSwic2F2ZVBhY2thZ2VOYW1lIjoib3JnLmV4YW1wbGUub3JkZXJzIiwic2F2ZVBhdGgiOiIuL09yZGVyQW5kVXNlclByb2plY3QvT3JkZXJzL3NyYy9tYWluL2phdmEvb3JnL2V4YW1wbGUvb3JkZXJzIiwic2F2ZU1vZGVsTmFtZSI6Ik9yZGVycyJ9" />
+        <entry key="day09_demo01.user" value="eyJuYW1lIjoiVXNlciIsInByZU5hbWUiOiIiLCJ0ZW1wbGF0ZUdyb3VwTmFtZSI6IiIsImZ1bGxDb2x1bW4iOlt7Im5hbWUiOiJpZCIsInR5cGUiOiJqYXZhLmxhbmcuSW50ZWdlciIsImN1c3RvbSI6ZmFsc2UsImV4dCI6Int9In0seyJuYW1lIjoidXNlcm5hbWUiLCJ0eXBlIjoiamF2YS5sYW5nLlN0cmluZyIsImN1c3RvbSI6ZmFsc2UsImV4dCI6Int9In0seyJuYW1lIjoic2V4IiwidHlwZSI6ImphdmEubGFuZy5TdHJpbmciLCJjdXN0b20iOmZhbHNlLCJleHQiOiJ7fSJ9XSwic2F2ZVBhY2thZ2VOYW1lIjoiIiwic2F2ZVBhdGgiOiIiLCJzYXZlTW9kZWxOYW1lIjoiIn0=" />
+      </map>
+    </option>
+  </component>
+</project>
