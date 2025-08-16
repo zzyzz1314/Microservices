@@ -3,6 +3,8 @@ package cn.zwh.ymcc.service;
 import cn.zwh.ymcc.domain.CourseChapter;
 import com.baomidou.mybatisplus.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 课程章节 ， 一个课程，多个章节，一个章节，多个视频 服务类
@@ -13,4 +15,6 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface ICourseChapterService extends IService<CourseChapter> {
 
+    //根据课程id查询课程章节
+    List<CourseChapter> listByCourseId(Long courseId);
 }

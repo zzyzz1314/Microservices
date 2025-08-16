@@ -18,6 +18,7 @@
         <module>ymcc-service-user</module>
         <module>ymcc-common</module>
         <module>ymcc-service-course</module>
+        <module>ymcc-service-media</module>
     </modules>
 
     <properties>

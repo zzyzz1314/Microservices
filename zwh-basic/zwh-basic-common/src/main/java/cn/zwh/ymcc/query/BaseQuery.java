@@ -9,7 +9,7 @@ public class BaseQuery {
 
     private Integer page=1;
 
-    private Integer rows=10;
+    private Integer rows=20;
 
     private String sortField;
 

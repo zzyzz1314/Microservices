@@ -1,0 +1,26 @@
+server:
+  port: 10070
+spring:
+  application:
+    name: service-media #服务名
+  datasource:
+    url: jdbc:mysql:///ymcc-media?serverTimezone=UTC
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  cloud:
+    nacos:
+    discovery:
+    server-addr: 127.0.0.1:8848
+  main:
+    allow-bean-definition-overriding: true
+mybatis-plus:
+  mapper-locations: classpath:cn/zwh/ymcc/mapper/*Mapper.xml
+  configuration: #mybatis-plus日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+media:
+  upload-base-dir: "d:/" #分片上传地址
+  ffmpeg‐path: "D:/develop/headend/ffmpeg/bin/ffmpeg.exe" #ffmpeg视频工具安装地址
+  rtmp: "rtmp://115.159.88.63:1935/live/" # 推流到云服务器的地址
+  play: "http://115.159.88.63:8080/live/"

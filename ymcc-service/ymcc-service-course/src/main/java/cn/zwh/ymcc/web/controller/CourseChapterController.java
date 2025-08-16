@@ -65,4 +65,10 @@ public class CourseChapterController {
         page = courseChapterService.selectPage(page);
         return JSONResult.success(new PageList<CourseChapter>(page.getTotal(),page.getRecords()));
     }
+
+    //listByCourseId
+    @RequestMapping(value = "/listByCourseId/{courseId}",method = RequestMethod.GET)
+    public JSONResult listByCourseId(@PathVariable("courseId") Long courseId){
+        return JSONResult.success(courseChapterService.listByCourseId(courseId));
+    }
 }
