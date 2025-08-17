@@ -4,23 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>cn.zwh-ymcc</groupId>
-        <artifactId>zwh-ymcc</artifactId>
+        <groupId>cn.zwh.ymcc</groupId>
+        <artifactId>ymcc-pojo</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>cn.zwh.ymcc</groupId>
-    <artifactId>ymcc-service</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>ymcc-service-system</module>
-        <module>ymcc-service-uaa</module>
-        <module>ymcc-service-user</module>
-        <module>ymcc-common</module>
-        <module>ymcc-service-course</module>
-        <module>ymcc-service-media</module>
-        <module>ymcc-service-search</module>
-    </modules>
+    <artifactId>ymcc-pojo-search</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

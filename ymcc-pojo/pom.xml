@@ -18,6 +18,7 @@
         <module>ymcc-pojo-user</module>
         <module>ymcc-pojo-course</module>
         <module>ymcc-pojo-media</module>
+        <module>ymcc-pojo-search</module>
     </modules>
 
     <properties>

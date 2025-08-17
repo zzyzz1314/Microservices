@@ -24,3 +24,17 @@ media:
   ffmpeg‐path: "D:/develop/headend/ffmpeg/bin/ffmpeg.exe" #ffmpeg视频工具安装地址
   rtmp: "rtmp://115.159.88.63:1935/live/" # 推流到云服务器的地址
   play: "http://115.159.88.63:8080/live/"
+
+rocketmq:
+  name-server: 127.0.0.1:9876
+  # 是否开启自动配置
+  producer:
+    # 发送同一类消息设置为同一个group，保证唯一默认不需要设置，rocketmq会使用ip@pid（pid代表jvm名字）作为唯一标识
+    group: "service-media-producer"
+    # 消息最大长度 默认 1024 * 4 (4M)
+    max-message-size: 4096
+    # 发送消息超时时间，默认 3000
+    send-message-timeout: 3000
+    # 发送消息失败重试次数，默认2
+    retry-times-when-send-failed: 2
+    retry-times-when-send-async-failed: 2

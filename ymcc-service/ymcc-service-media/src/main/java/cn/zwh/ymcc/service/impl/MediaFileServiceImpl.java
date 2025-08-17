@@ -4,6 +4,7 @@ import cn.zwh.ymcc.domain.MediaFile;
 import cn.zwh.ymcc.mapper.MediaFileMapper;
 import cn.zwh.ymcc.result.JSONResult;
 import cn.zwh.ymcc.service.IMediaFileService;
+import cn.zwh.ymcc.service.IMediaSenderService;
 import cn.zwh.ymcc.utils.HlsVideoUtil;
 import cn.zwh.ymcc.utils.Mp4VideoUtil;
 import com.alibaba.druid.util.StringUtils;
@@ -36,8 +37,8 @@ public class MediaFileServiceImpl extends ServiceImpl<MediaFileMapper, MediaFile
     @Autowired
     private MediaFileMapper mediaFileMapper;
 
-    //@Autowired
-    //private MediaProducer mediaProducer;
+    @Autowired
+    private IMediaSenderService mediaSenderService;
 
     /**
      * 配置
@@ -146,8 +147,8 @@ public class MediaFileServiceImpl extends ServiceImpl<MediaFileMapper, MediaFile
         mediaFileMapper.insert(mediaFile);
 
         // 文件上传到视频服务器做 断点续播
-        boolean success = true ; //mediaProducer.synSend(mediaFile);
-
+        boolean success = mediaSenderService.send(mediaFile); //mediaProducer.synSend(mediaFile);
+        // return handleFile2m3u8(mediaFile); 推流
         log.info("合并文件耗时 {}" ,System.currentTimeMillis() - startTime);
         return success?JSONResult.success():JSONResult.error();
     }

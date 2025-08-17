@@ -1,0 +1,14 @@
+server:
+  port: 10080
+spring:
+  elasticsearch:
+    rest:
+      uris: http://localhost:9200
+  application:
+    name: service-search #服务名
+  cloud:
+    nacos:
+    discovery:
+    server-addr: 127.0.0.1:8848
+  main:
+    allow-bean-definition-overriding: true
