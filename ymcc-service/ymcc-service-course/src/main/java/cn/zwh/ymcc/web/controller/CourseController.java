@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/course")
@@ -18,6 +19,17 @@ public class CourseController {
 
     @Autowired
     public ICourseService courseService;
+
+    /**
+    * 课程上线
+    */
+    @RequestMapping(value="/onLineCourse",method= RequestMethod.POST)
+    public JSONResult onLineCourse(@RequestBody List<Long> courseIds){
+        courseService.onLineCourse(courseIds);
+        return JSONResult.success();
+    }
+
+
 
     /**
     * 保存和修改公用的

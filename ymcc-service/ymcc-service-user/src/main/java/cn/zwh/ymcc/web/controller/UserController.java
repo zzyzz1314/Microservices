@@ -10,6 +10,8 @@ import com.baomidou.mybatisplus.plugins.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -23,13 +25,10 @@ public class UserController {
         return JSONResult.success();
     }
 
-
-
-
-
-
-
-
+    @PostMapping("/userIds")
+    public List<User> findAll(){
+        return userService.selectAll();
+    }
 
 
     /**

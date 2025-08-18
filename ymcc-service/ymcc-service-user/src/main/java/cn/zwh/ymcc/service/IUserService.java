@@ -4,6 +4,8 @@ import cn.zwh.ymcc.domain.User;
 import cn.zwh.ymcc.dto.RegisterParamDto;
 import com.baomidou.mybatisplus.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 会员登录账号 服务类
@@ -17,4 +19,6 @@ import com.baomidou.mybatisplus.service.IService;
 public interface IUserService extends IService<User> {
 
     void phoneRegister(RegisterParamDto registerParamDto);
+
+    List<User> selectAll();
 }

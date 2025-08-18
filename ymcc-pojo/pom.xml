@@ -19,6 +19,7 @@
         <module>ymcc-pojo-course</module>
         <module>ymcc-pojo-media</module>
         <module>ymcc-pojo-search</module>
+        <module>ymcc-pojo-common</module>
     </modules>
 
     <properties>

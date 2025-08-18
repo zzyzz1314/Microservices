@@ -4,6 +4,8 @@ import cn.zwh.ymcc.domain.Course;
 import cn.zwh.ymcc.dto.CourseSaveDto;
 import com.baomidou.mybatisplus.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -19,4 +21,10 @@ public interface ICourseService extends IService<Course> {
      * @param courseSaveDto
      */
     void save(CourseSaveDto courseSaveDto);
+
+    /**
+     * 上线课程
+     * @param courseIds
+     */
+    void onLineCourse(List<Long> courseIds);
 }

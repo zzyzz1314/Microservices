@@ -25,7 +25,9 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -46,6 +48,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private IUserAccountService userAccountService;
     @Autowired
     private IUserBaseInfoService userBaseInfoService;
+    @Autowired
+    private UserMapper userMapper;
 
 
     @Override
@@ -134,5 +138,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         userBaseInfoService.insert(userBaseInfo);
 
         redisTemplate.delete(key);
+    }
+
+    @Override
+    public List<User> selectAll() {
+        return userMapper.selectAll();
     }
 }
