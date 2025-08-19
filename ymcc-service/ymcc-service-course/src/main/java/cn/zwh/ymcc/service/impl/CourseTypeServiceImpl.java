@@ -2,8 +2,12 @@ package cn.zwh.ymcc.service.impl;
 
 import cn.zwh.ymcc.constants.BusinessConstants;
 import cn.zwh.ymcc.domain.CourseType;
+import cn.zwh.ymcc.exception.GlobleBusinessException;
+import cn.zwh.ymcc.exception.GlobleExceptionHandler;
 import cn.zwh.ymcc.mapper.CourseTypeMapper;
 import cn.zwh.ymcc.service.ICourseTypeService;
+import cn.zwh.ymcc.vo.CourseTypeCrumbsVo;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
@@ -12,9 +16,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>
@@ -43,6 +45,41 @@ public class CourseTypeServiceImpl extends ServiceImpl<CourseTypeMapper, CourseT
         redisTemplate.opsForValue().set(BusinessConstants.REDIS_COURSE_TYPE_DATA,firstCourseTypes);
 
         return firstCourseTypes;
+    }
+
+    @Override
+    public List<CourseTypeCrumbsVo> crumbs(Long courseTypeId) {
+        // 判断参数
+        if(courseTypeId==null){
+            throw new GlobleBusinessException("参数异常");
+
+        }
+
+        // 根据id查询
+        CourseType courseType = selectById(courseTypeId);
+
+        if(courseType==null){
+            throw new GlobleBusinessException("参数异常");
+        }
+
+        // 获取path，
+        String[] idStrs = courseType.getPath().split("\\.");
+
+        List<CourseType> courseTypes = selectBatchIds(Arrays.asList(idStrs));
+
+        List<CourseTypeCrumbsVo> courseTypeCrumbsVos = new ArrayList<>();
+
+        courseTypes.forEach(type -> {
+            EntityWrapper<CourseType> wrapper = new EntityWrapper<>();
+
+            wrapper.eq("pid",type.getPid());
+            wrapper.notIn("id",type.getId());
+            List<CourseType> others = selectList(wrapper);
+
+            courseTypeCrumbsVos.add(new CourseTypeCrumbsVo(type,others));
+        });
+
+        return courseTypeCrumbsVos;
     }
 
     private List<CourseType> getCourseTypes() {

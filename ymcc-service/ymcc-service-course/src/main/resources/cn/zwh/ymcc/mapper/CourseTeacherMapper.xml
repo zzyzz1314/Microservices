@@ -9,4 +9,20 @@
         <result column="course_id" property="courseId" />
     </resultMap>
 
+
+    <select id="selectTeachersByCourseId" resultType="cn.zwh.ymcc.domain.Teacher">
+        select
+            t.id,
+            t.name,
+            t.intro,
+            t.technology,
+            t.position,
+            t.head_img headImg,
+            t.tags
+        from t_course_teacher ct
+        inner join t_teacher t
+        on ct.teacher_id = t.id
+        where ct.course_id = #{courseId}
+    </select>
+
 </mapper>

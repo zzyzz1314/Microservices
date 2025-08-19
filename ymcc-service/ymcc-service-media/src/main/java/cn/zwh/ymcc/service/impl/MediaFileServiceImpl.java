@@ -1,6 +1,7 @@
 package cn.zwh.ymcc.service.impl;
 
 import cn.zwh.ymcc.domain.MediaFile;
+import cn.zwh.ymcc.exception.GlobleBusinessException;
 import cn.zwh.ymcc.mapper.MediaFileMapper;
 import cn.zwh.ymcc.result.JSONResult;
 import cn.zwh.ymcc.service.IMediaFileService;
@@ -215,6 +216,17 @@ public class MediaFileServiceImpl extends ServiceImpl<MediaFileMapper, MediaFile
         return JSONResult.success();
     }
 
+    @Override
+    public List<MediaFile> selectMediaFileByCourseId(Long courseId) {
+        if (courseId == null){
+            throw new GlobleBusinessException("课程id异常");
+        }
+
+        Wrapper<MediaFile> ww=new EntityWrapper<>();
+        ww.eq("course_id", courseId);
+        List<MediaFile> mediaFiles = selectList(ww);
+        return mediaFiles;
+    }
 
 
     /*

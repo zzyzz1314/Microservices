@@ -1,7 +1,10 @@
 package cn.zwh.ymcc.mapper;
 
 import cn.zwh.ymcc.domain.CourseTeacher;
+import cn.zwh.ymcc.domain.Teacher;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface CourseTeacherMapper extends BaseMapper<CourseTeacher> {
 
+    List<Teacher> selectTeachersByCourseId(Long courseId);
 }

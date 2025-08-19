@@ -5,6 +5,7 @@ import cn.zwh.ymcc.domain.CourseType;
 import cn.zwh.ymcc.query.CourseTypeQuery;
 import cn.zwh.ymcc.result.JSONResult;
 import cn.zwh.ymcc.result.PageList;
+import cn.zwh.ymcc.vo.CourseTypeCrumbsVo;
 import com.baomidou.mybatisplus.plugins.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,12 @@ public class CourseTypeController {
     public JSONResult treeData(){
         List<CourseType> nodeList = courseTypeService.getTreeData();
         return JSONResult.success(nodeList);
+    }
+
+    @GetMapping("/crumbs/{courseTypeId}")
+    public JSONResult crumbs(@PathVariable Long courseTypeId){
+        List<CourseTypeCrumbsVo> vos= courseTypeService.crumbs(courseTypeId);
+        return JSONResult.success(vos);
     }
 
 

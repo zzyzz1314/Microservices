@@ -1,6 +1,7 @@
 package cn.zwh.ymcc.service;
 
 import cn.zwh.ymcc.domain.CourseType;
+import cn.zwh.ymcc.vo.CourseTypeCrumbsVo;
 import com.baomidou.mybatisplus.service.IService;
 
 import java.util.List;
@@ -17,4 +18,8 @@ public interface ICourseTypeService extends IService<CourseType> {
 
     List<CourseType> getTreeData();
 
+    /*
+    * 面包屑
+    * */
+    List<CourseTypeCrumbsVo> crumbs(Long courseTypeId);
 }

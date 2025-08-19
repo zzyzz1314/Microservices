@@ -2,6 +2,7 @@ package cn.zwh.ymcc.service;
 
 import cn.zwh.ymcc.domain.Course;
 import cn.zwh.ymcc.dto.CourseSaveDto;
+import cn.zwh.ymcc.vo.CourseDetailDataVo;
 import com.baomidou.mybatisplus.service.IService;
 
 import java.util.List;
@@ -27,4 +28,6 @@ public interface ICourseService extends IService<Course> {
      * @param courseIds
      */
     void onLineCourse(List<Long> courseIds);
+
+    CourseDetailDataVo detail(Long courseId);
 }

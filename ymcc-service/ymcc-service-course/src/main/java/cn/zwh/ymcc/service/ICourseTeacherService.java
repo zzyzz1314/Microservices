@@ -1,7 +1,10 @@
 package cn.zwh.ymcc.service;
 
 import cn.zwh.ymcc.domain.CourseTeacher;
+import cn.zwh.ymcc.domain.Teacher;
 import com.baomidou.mybatisplus.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface ICourseTeacherService extends IService<CourseTeacher> {
 
+    List<Teacher> selectTeachersByCourseId(Long courseId);
 }

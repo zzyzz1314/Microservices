@@ -5,7 +5,13 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -16,6 +22,9 @@ import java.io.Serializable;
  * @since 2025-08-14
  */
 @TableName("t_course_chapter")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CourseChapter extends Model<CourseChapter> {
 
     private static final long serialVersionUID = 1L;
@@ -41,60 +50,13 @@ public class CourseChapter extends Model<CourseChapter> {
     @TableField("course_name")
     private String courseName;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getNumber() {
-        return number;
-    }
-
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
-
-    public Long getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
-    }
-
-    public String getCourseName() {
-        return courseName;
-    }
-
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
+    //一个章节中有多个视频
+    @TableField(exist = false)
+    private List<MediaFile> mediaFiles=new ArrayList<>();
 
     @Override
     protected Serializable pkVal() {
         return this.id;
     }
 
-    @Override
-    public String toString() {
-        return "CourseChapter{" +
-        ", id=" + id +
-        ", name=" + name +
-        ", number=" + number +
-        ", courseId=" + courseId +
-        ", courseName=" + courseName +
-        "}";
-    }
 }

@@ -7,8 +7,12 @@ import cn.zwh.ymcc.domain.*;
 import cn.zwh.ymcc.dto.*;
 import cn.zwh.ymcc.exception.GlobleBusinessException;
 import cn.zwh.ymcc.mapper.CourseMapper;
+import cn.zwh.ymcc.result.JSONResult;
 import cn.zwh.ymcc.service.*;
+import cn.zwh.ymcc.vo.CourseDetailDataVo;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.SendResult;
@@ -26,7 +30,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author whale
@@ -55,6 +59,11 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     private RocketMQTemplate rocketMQTemplate;
     @Autowired
     private PublishFeignAPI publishFeignAPI;
+    @Autowired
+    private ICourseChapterService courseChapterService;
+    @Autowired
+    private MediaFeignAPI mediaFeignAPI;
+
     @Override
     public void save(CourseSaveDto courseSaveDto) {
         Course course = courseSaveDto.getCourse();
@@ -105,7 +114,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         List<Course> courses = selectBatchIds(courseIds);
         courses.forEach(course -> {
             if (course.getStatus() == Course.ONLINE) {
-                throw new GlobleBusinessException(course.getName()+"课程已上线");
+                throw new GlobleBusinessException(course.getName() + "课程已上线");
             }
         });
         //3.更新课程信息
@@ -134,7 +143,51 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         publishMessage();
     }
 
-    public void publishMessage(){
+    @Override
+    public CourseDetailDataVo detail(Long courseId) {
+
+        Course course = selectById(courseId);
+
+        CourseMarket courseMarket = courseMarketService.selectById(courseId);
+
+        //1.课程对应的章节
+
+        Wrapper<CourseChapter> ww=new EntityWrapper<>();
+        ww.eq("course_id", courseId);
+        List<CourseChapter> chapters= courseChapterService.selectList(ww);
+
+        //远程调用media服务，根据课程id查询media
+        JSONResult jsonResult = mediaFeignAPI.selectMediaFileByCourseId(courseId);
+        Object data = jsonResult.getData();
+        String jsonString = JSONObject.toJSONString(data);
+        List<MediaFile> mediaFiles = JSONObject.parseArray(jsonString, MediaFile.class);
+
+        mediaFiles.forEach(mediaFile -> {
+            chapters.forEach(chapter -> {
+                if (mediaFile.getChapterId().longValue()==chapter.getId().longValue()){
+                    chapter.getMediaFiles().add(mediaFile);
+                }
+            });
+        });
+
+
+        List<Teacher> teachers = courseTeacherService.selectTeachersByCourseId(courseId);
+
+        CourseDetail courseDetail = courseDetailService.selectById(courseId);
+
+        CourseSummary courseSummary = courseSummaryService.selectById(courseId);
+
+        CourseDetailDataVo courseDetailDataVo = new CourseDetailDataVo();
+        courseDetailDataVo.setCourse(course);
+        courseDetailDataVo.setCourseDetail(courseDetail);
+        courseDetailDataVo.setCourseMarket(courseMarket);
+        courseDetailDataVo.setCourseSummary(courseSummary);
+        courseDetailDataVo.setTeachers(teachers);
+        courseDetailDataVo.setCourseChapters(chapters);
+        return courseDetailDataVo;
+    }
+
+    public void publishMessage() {
         //1.准备消息内容
         MessageStationDto messageStationDto = new MessageStationDto();
         messageStationDto.setTitle("课程发布");
@@ -147,7 +200,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         SendResult sendResult = rocketMQTemplate.syncSend(BusinessConstants.ROCKETMQ_COURSE_PUBLISH_MESSAGE_TOPIC +
                         ":" + BusinessConstants.ROCKETMQ_COURSE_PUBLISH_MESSAGE_TAGS_STATION,
                 MessageBuilder.withPayload(JSONObject.toJSONString(messageStationDto)).build());
-        log.info("发送站内消息结果为:{}",sendResult);
+        log.info("发送站内消息结果为:{}", sendResult);
 
 
         //准备短信消息内容 假的
@@ -169,7 +222,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         SendResult sendResultSMS = rocketMQTemplate.syncSend(BusinessConstants.ROCKETMQ_COURSE_PUBLISH_MESSAGE_TOPIC +
                         ":" + BusinessConstants.ROCKETMQ_COURSE_PUBLISH_MESSAGE_TAGS_SMS,
                 MessageBuilder.withPayload(JSONObject.toJSONString(messageSMSDto)).build());
-        log.info("发送短信消息结果为:{}",sendResultSMS);
+        log.info("发送短信消息结果为:{}", sendResultSMS);
 
         //准备邮件消息内容 假的
         MessageEmailDto messageEmailDto = new MessageEmailDto();
@@ -186,8 +239,8 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
         //发送邮箱消息
         SendResult sendResultEmail = rocketMQTemplate.syncSend(BusinessConstants.ROCKETMQ_COURSE_PUBLISH_MESSAGE_TOPIC +
-                ":"+BusinessConstants.ROCKETMQ_COURSE_PUBLISH_MESSAGE_TAGS_EMAIL,
+                        ":" + BusinessConstants.ROCKETMQ_COURSE_PUBLISH_MESSAGE_TAGS_EMAIL,
                 MessageBuilder.withPayload(JSONObject.toJSONString(messageEmailDto)).build());
-        log.info("发送短信消息结果为:{}",sendResultEmail);
+        log.info("发送短信消息结果为:{}", sendResultEmail);
     }
 }

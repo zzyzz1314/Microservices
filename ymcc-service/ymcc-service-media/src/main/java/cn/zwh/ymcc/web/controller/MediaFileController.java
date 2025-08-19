@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/mediaFile")
 @Slf4j
@@ -18,6 +20,16 @@ public class MediaFileController {
 
     @Autowired
     public IMediaFileService mediaFileService;
+
+    /*
+    * 根据课程ID查询课程媒资
+    * */
+    @GetMapping("/selectMediaFileByCourseId/{courseId}")
+    public JSONResult selectMediaFileByCourseId(@PathVariable("courseId") Long courseId) {
+        List<MediaFile> mediaFiles =mediaFileService.selectMediaFileByCourseId(courseId);
+        return JSONResult.success(mediaFiles);
+    }
+
 
     //文件注册，检查文件是否已经上传
     @PostMapping("/register")
