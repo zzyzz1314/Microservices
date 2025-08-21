@@ -23,7 +23,9 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -152,9 +154,9 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
         //1.课程对应的章节
 
-        Wrapper<CourseChapter> ww=new EntityWrapper<>();
+        Wrapper<CourseChapter> ww = new EntityWrapper<>();
         ww.eq("course_id", courseId);
-        List<CourseChapter> chapters= courseChapterService.selectList(ww);
+        List<CourseChapter> chapters = courseChapterService.selectList(ww);
 
         //远程调用media服务，根据课程id查询media
         JSONResult jsonResult = mediaFeignAPI.selectMediaFileByCourseId(courseId);
@@ -164,7 +166,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
         mediaFiles.forEach(mediaFile -> {
             chapters.forEach(chapter -> {
-                if (mediaFile.getChapterId().longValue()==chapter.getId().longValue()){
+                if (mediaFile.getChapterId().longValue() == chapter.getId().longValue()) {
                     chapter.getMediaFiles().add(mediaFile);
                 }
             });
@@ -185,6 +187,32 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         courseDetailDataVo.setTeachers(teachers);
         courseDetailDataVo.setCourseChapters(chapters);
         return courseDetailDataVo;
+    }
+
+    @Override
+    public CourseInfoDto info(String courseIds) {
+
+        String[] ids = courseIds.split(",");
+        List<Course> courses = selectBatchIds(Arrays.asList(ids));
+        List<CourseMarket> courseMarkets = courseMarketService.selectBatchIds(Arrays.asList(ids));
+
+        List<CourseDto> courseInfos = new ArrayList<>();
+        CourseInfoDto courseInfoDto = new CourseInfoDto();
+
+        BigDecimal totalAmount = new BigDecimal(0);
+
+        for (CourseMarket courseMarket : courseMarkets) {
+            totalAmount = totalAmount.add(courseMarket.getPrice());
+            for (Course course : courses) {
+                if (course.getId().longValue() == courseMarket.getId().longValue()) {
+                    CourseDto courseDto = new CourseDto(course, courseMarket);
+                    courseInfos.add(courseDto);
+                }
+            }
+        }
+        courseInfoDto.setCourseInfos(courseInfos);
+        courseInfoDto.setTotalAmount(totalAmount);
+        return courseInfoDto;
     }
 
     public void publishMessage() {

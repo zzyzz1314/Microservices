@@ -2,8 +2,14 @@ package cn.zwh.ymcc.constants;
 
 public class BusinessConstants {
 
+    //redis================================================================
+    //手机号注册
     public static final String PHONE_REGISTER="phone_register";
+    //课程类型树形数据
     public static final String REDIS_COURSE_TYPE_DATA="redis_course_type_data";
+
+    //防止重复提交订单的键
+    public static final String REDIS_PREVENT_REPEAT_SUBMIT_ORDER="prevent_repeat_submit_order:%s:%s";
 
     //rocketMQ==============================================================
 

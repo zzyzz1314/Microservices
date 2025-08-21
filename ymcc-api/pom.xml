@@ -18,6 +18,7 @@
         <module>ymcc-api-search</module>
         <module>ymcc-api-user</module>
         <module>ymcc-api-media</module>
+        <module>ymcc-api-course</module>
     </modules>
 
     <properties>

@@ -1,5 +1,6 @@
 package cn.zwh.ymcc.web.controller;
 
+import cn.zwh.ymcc.dto.CourseInfoDto;
 import cn.zwh.ymcc.dto.CourseSaveDto;
 import cn.zwh.ymcc.service.ICourseService;
 import cn.zwh.ymcc.domain.Course;
@@ -22,6 +23,16 @@ public class CourseController {
     public ICourseService courseService;
 
     /**
+     * 根据课程id 查询课程info
+     */
+    @GetMapping("/info/{courseId}")
+    public JSONResult info(@PathVariable("courseId") String courseIds) {
+        CourseInfoDto courseInfoDto = courseService.info(courseIds);
+        return JSONResult.success(courseInfoDto);
+    }
+
+
+    /**
      * 课程上线
      */
     @RequestMapping(value = "/onLineCourse", method = RequestMethod.POST)
@@ -32,7 +43,7 @@ public class CourseController {
 
 
     /**
-     * 课程详情查询
+     * 根据课程id 查询课程详情
      */
     @RequestMapping(value = "/detail/data/{courseId}", method = RequestMethod.GET)
     public JSONResult detail(@PathVariable("courseId") Long courseId) {

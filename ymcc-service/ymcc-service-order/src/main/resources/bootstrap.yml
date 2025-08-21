@@ -1,0 +1,17 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
+  application:
+    name: service-order
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #注册中心
+      config:
+        server-addr: localhost:8848 #配置中心
+        file-extension: yaml #配置文件格式
+        prefix: application-order #配置前缀 ，默认使用sring.application.name
+        group: DEFAULT_GROUP
+        namespace: 7da4bff8-6d15-45dc-bfba-a7b1005c19bd

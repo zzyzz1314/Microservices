@@ -30,6 +30,19 @@ public class MediaFileController {
         return JSONResult.success(mediaFiles);
     }
 
+    /**
+     *根据媒体的id查播放的地址
+     */
+    @GetMapping("/getForUrl/{mediaId}")
+    public JSONResult getForUrl(@PathVariable("mediaId") Long mediaId) {
+        MediaFile mediaFile = mediaFileService.selectById(mediaId);
+        if (mediaFile == null) {
+            return JSONResult.error("媒体文件不存在");
+        }
+        return JSONResult.success(mediaFile.getFileUrl());
+    }
+
+
 
     //文件注册，检查文件是否已经上传
     @PostMapping("/register")

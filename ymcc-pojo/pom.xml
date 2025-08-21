@@ -20,6 +20,7 @@
         <module>ymcc-pojo-media</module>
         <module>ymcc-pojo-search</module>
         <module>ymcc-pojo-common</module>
+        <module>ymcc-pojo-order</module>
     </modules>
 
     <properties>
