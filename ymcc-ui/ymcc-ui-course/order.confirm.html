@@ -606,7 +606,7 @@
 									orderNo:orderNo,
 									payType: _this.orderForm.payType,
 									//支付完成跳转地址
-									callUrl : "http://course.ymcc.com:6002/detail.html?courseId="+_this.orderForm.courseIds[0]
+									callUrl : "http://localhost:80/detail.html?courseId="+_this.orderForm.courseIds[0]
 								};
 								//TODO : 根据订单号去查询一下支付单号了没有，如果没有好，再延迟3s中，再次查询一下。
 								_this.$http.get("/pay/pay/checkPayOrder/"+orderNo).then(res=>{
