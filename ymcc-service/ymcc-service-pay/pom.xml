@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>ymcc-service-order</artifactId>
+    <artifactId>ymcc-service-pay</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.zwh.ymcc</groupId>
-            <artifactId>ymcc-pojo-order</artifactId>
+            <artifactId>ymcc-pojo-pay</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
@@ -30,39 +30,17 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-        <!--整合Redis , 底层可以用jedis-->
+        <!--pom.xml  支付宝sdk -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>io.lettuce</groupId>
-                    <artifactId>lettuce-core</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>cn.zwh.ymcc</groupId>
-            <artifactId>ymcc-api-course</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-easysdk</artifactId>
+            <version>2.2.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-spring-boot-starter</artifactId>
             <version>2.0.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>cn.zwh.ymcc</groupId>
-            <artifactId>ymcc-pojo-pay</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
 
     </dependencies>

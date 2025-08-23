@@ -21,6 +21,7 @@
         <module>ymcc-service-media</module>
         <module>ymcc-service-search</module>
         <module>ymcc-service-order</module>
+        <module>ymcc-service-pay</module>
     </modules>
 
     <properties>

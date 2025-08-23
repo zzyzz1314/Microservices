@@ -11,6 +11,13 @@ public class BusinessConstants {
     //防止重复提交订单的键
     public static final String REDIS_PREVENT_REPEAT_SUBMIT_ORDER="prevent_repeat_submit_order:%s:%s";
 
+    //订单服务，发送事务消息，监听器的组名
+    public static final String MQ_COURSEORDER_PAY_GROUP_TRANSACTION="mq_courseorder_pay_group_transaction";
+    //订单服务，发送事务消息，监听器的 topic
+    public static final String MQ_TOPIC_ORDER="mq_topic_order";
+    //订单服务，发送事务消息，监听器的 tags
+    public static final String MQ_TAGS_COURSEORDER_PAYORDER="mq_tags_courseorder_payorder";
+
     //rocketMQ==============================================================
 
     //媒体推送消息 topic
