@@ -4,17 +4,23 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="cn.zwh.ymcc.domain.CourseOrder">
-        <id column="id" property="id" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
-        <result column="order_no" property="orderNo" />
-        <result column="total_amount" property="totalAmount" />
-        <result column="total_count" property="totalCount" />
-        <result column="status_order" property="statusOrder" />
-        <result column="user_id" property="userId" />
-        <result column="title" property="title" />
-        <result column="version" property="version" />
-        <result column="pay_type" property="payType" />
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="total_amount" property="totalAmount"/>
+        <result column="total_count" property="totalCount"/>
+        <result column="status_order" property="statusOrder"/>
+        <result column="user_id" property="userId"/>
+        <result column="title" property="title"/>
+        <result column="version" property="version"/>
+        <result column="pay_type" property="payType"/>
     </resultMap>
+    <update id="updateOrderStatus">
+        update course_order
+        set status_order = #{statusOrder},
+            update_time  = #{updateTime}
+        where order_no = #{orderNo}
+    </update>
 
 </mapper>

@@ -1,6 +1,8 @@
 package cn.zwh.ymcc.service.impl;
 
 import cn.zwh.ymcc.*;
+import cn.zwh.ymcc.api.MediaFeignAPI;
+import cn.zwh.ymcc.api.SearchFeignAPI;
 import cn.zwh.ymcc.constants.BusinessConstants;
 import cn.zwh.ymcc.doc.CourseDoc;
 import cn.zwh.ymcc.domain.*;

@@ -18,6 +18,11 @@ public class BusinessConstants {
     //订单服务，发送事务消息，监听器的 tags
     public static final String MQ_TAGS_COURSEORDER_PAYORDER="mq_tags_courseorder_payorder";
 
+    // 超时未支付  延迟消息的topic
+    public static final String ROCKETMQ_TOPIC_ORDER_LEAVE_TIMEOUT="rocketmq_topic_order_leave_timeout";
+    // 超时未支付  延迟消息的tags
+    public static final String ROCKETMQ_TAGS_ORDER_LEAVE_TIMEOUT="rocketmq_tags_order_leave_timeout";
+
     //rocketMQ==============================================================
 
     //媒体推送消息 topic

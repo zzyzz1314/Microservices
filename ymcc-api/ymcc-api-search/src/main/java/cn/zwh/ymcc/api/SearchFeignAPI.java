@@ -1,4 +1,4 @@
-package cn.zwh.ymcc;
+package cn.zwh.ymcc.api;
 
 import cn.zwh.ymcc.doc.CourseDoc;
 import cn.zwh.ymcc.result.JSONResult;

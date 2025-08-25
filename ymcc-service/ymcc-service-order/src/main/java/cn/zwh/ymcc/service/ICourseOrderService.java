@@ -2,6 +2,8 @@ package cn.zwh.ymcc.service;
 
 import cn.zwh.ymcc.domain.CourseOrder;
 import cn.zwh.ymcc.dto.PlaceOrderDto;
+import cn.zwh.ymcc.dto.UpdateOrderStatusDto;
+import cn.zwh.ymcc.result.JSONResult;
 import com.baomidou.mybatisplus.service.IService;
 
 /**
@@ -26,4 +28,6 @@ public interface ICourseOrderService extends IService<CourseOrder> {
      * @param courseOrder
      */
     void saveOrderAndItem(CourseOrder courseOrder);
+
+    JSONResult updateOrderStatus(UpdateOrderStatusDto updateOrderStatusDto);
 }

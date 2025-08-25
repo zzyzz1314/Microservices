@@ -1,6 +1,7 @@
 package cn.zwh.ymcc.mapper;
 
 import cn.zwh.ymcc.domain.CourseOrder;
+import cn.zwh.ymcc.dto.UpdateOrderStatusDto;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**
@@ -13,4 +14,8 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface CourseOrderMapper extends BaseMapper<CourseOrder> {
 
+    /*
+    * 根据订单编号修改订单状态
+    * */
+    void updateOrderStatus(UpdateOrderStatusDto updateOrderStatusDto);
 }

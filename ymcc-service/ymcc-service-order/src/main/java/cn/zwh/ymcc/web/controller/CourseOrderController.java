@@ -1,6 +1,7 @@
 package cn.zwh.ymcc.web.controller;
 
 import cn.zwh.ymcc.dto.PlaceOrderDto;
+import cn.zwh.ymcc.dto.UpdateOrderStatusDto;
 import cn.zwh.ymcc.service.ICourseOrderService;
 import cn.zwh.ymcc.domain.CourseOrder;
 import cn.zwh.ymcc.query.CourseOrderQuery;
@@ -16,6 +17,15 @@ public class CourseOrderController {
 
     @Autowired
     public ICourseOrderService courseOrderService;
+
+    /*
+    * 根据订单号 修改订单状态
+    * */
+    @PostMapping("/updateOrderStatus")
+    public JSONResult updateOrderStatus(@RequestBody UpdateOrderStatusDto updateOrderStatusDto){
+        return courseOrderService.updateOrderStatus(updateOrderStatusDto);
+    }
+
 
     @PostMapping("/placeOrder")
     public JSONResult placeOrder(@RequestBody PlaceOrderDto placeOrderDto){

@@ -1,6 +1,6 @@
 package cn.zwh.ymcc.service.impl;
 
-import cn.zwh.ymcc.CourseFeignAPI;
+import cn.zwh.ymcc.api.CourseFeignAPI;
 import cn.zwh.ymcc.constants.BusinessConstants;
 import cn.zwh.ymcc.domain.CourseOrder;
 import cn.zwh.ymcc.domain.CourseOrderItem;
@@ -8,6 +8,7 @@ import cn.zwh.ymcc.domain.PayOrder;
 import cn.zwh.ymcc.dto.CourseDto;
 import cn.zwh.ymcc.dto.CourseInfoDto;
 import cn.zwh.ymcc.dto.PlaceOrderDto;
+import cn.zwh.ymcc.dto.UpdateOrderStatusDto;
 import cn.zwh.ymcc.exception.GlobleBusinessException;
 import cn.zwh.ymcc.mapper.CourseOrderMapper;
 import cn.zwh.ymcc.result.JSONResult;
@@ -19,7 +20,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.client.producer.SendStatus;
 import org.apache.rocketmq.client.producer.TransactionSendResult;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
@@ -41,6 +44,7 @@ import java.util.List;
  * @author whale
  * @since 2025-08-21
  */
+@Slf4j
 @Service
 public class CourseOrderServiceImpl extends ServiceImpl<CourseOrderMapper, CourseOrder> implements ICourseOrderService {
 
@@ -52,8 +56,12 @@ public class CourseOrderServiceImpl extends ServiceImpl<CourseOrderMapper, Cours
 
     @Autowired
     private ICourseOrderItemService courseOrderItemService;
+
     @Autowired
     private RocketMQTemplate rocketMQTemplate;
+
+    @Autowired
+    private CourseOrderMapper courseOrderMapper;
 
     @Override
     public String placeOrder(PlaceOrderDto placeOrderDto) {
@@ -146,6 +154,19 @@ public class CourseOrderServiceImpl extends ServiceImpl<CourseOrderMapper, Cours
             throw new GlobleBusinessException("订单创建失败");
         }
 
+        // 发送延迟消息，为了处理超时未处理文件
+        SendResult sendResult = rocketMQTemplate.syncSend(BusinessConstants.ROCKETMQ_TOPIC_ORDER_LEAVE_TIMEOUT + ":" + BusinessConstants.ROCKETMQ_TAGS_ORDER_LEAVE_TIMEOUT,
+                MessageBuilder.withPayload(orderNo).build(),
+                3000,
+                4);
+        log.info("发送延迟消息结果为:{}",sendResult);
+        SendStatus sendStatus = sendResult.getSendStatus();
+        if (sendStatus != SendStatus.SEND_OK){
+            log.error("发送延迟消息失败:{}",sendResult);
+            //存表， 人工干涉
+        }
+
+
         redisTemplate.delete(key);
         return orderNo;
     }
@@ -162,5 +183,11 @@ public class CourseOrderServiceImpl extends ServiceImpl<CourseOrderMapper, Cours
         }
         insert(courseOrder);
         courseOrderItemService.insertBatch(courseOrder.getCourseOrderItemList());
+    }
+
+    @Override
+    public JSONResult updateOrderStatus(UpdateOrderStatusDto updateOrderStatusDto) {
+        courseOrderMapper.updateOrderStatus(updateOrderStatusDto);
+        return JSONResult.success();
     }
 }

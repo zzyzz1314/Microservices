@@ -16,5 +16,12 @@
         <result column="subject" property="subject" />
         <result column="pay_status" property="payStatus" />
     </resultMap>
+    <update id="updateStatusByOrderNo">
+        update t_pay_order
+        set pay_status  = #{payStatus},
+            update_time = #{now}
+        where order_no = #{outTradeNo}
+
+    </update>
 
 </mapper>
