@@ -36,9 +36,15 @@
 			</el-table-column>
 			<el-table-column prop="killCount" label="数量" width="80">
 			</el-table-column>
-			<el-table-column prop="beginTimeStr" label="开秒时间" >
+			<el-table-column prop="beginTime" label="开秒时间" >
+        <template v-slot:default="scope">
+          <span>{{ scope.row.beginTime | formatDateTime }}</span>
+        </template>
 			</el-table-column>
-			<el-table-column prop="endTimeStr" label="结束时间" >
+			<el-table-column prop="endTime" label="结束时间" >
+        <template v-slot:default="scope">
+          <span>{{ scope.row.endTime | formatDateTime }}</span>
+        </template>
 			</el-table-column>
 			<el-table-column label="操作" width="180">
 				<template scope="scope">

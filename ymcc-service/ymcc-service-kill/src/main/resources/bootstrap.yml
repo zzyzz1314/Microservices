@@ -1,0 +1,17 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
+  application:
+    name: service-kill
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #注册中心
+      config:
+        server-addr: localhost:8848 #配置中心
+        file-extension: yaml #配置文件格式
+        prefix: application-kill #配置前缀 ，默认使用sring.application.name
+        group: DEFAULT_GROUP
+        namespace: efdf986c-770d-430b-8fde-d8a289965d92

@@ -25,6 +25,11 @@ Vue.prototype.$http = axios
 
 import PartUpload from 'upload.vue'
 Vue.component("PartUpload", PartUpload);
+
+// 注册全局过滤器
+import { formatDateTime } from '@/dateFormat';
+Vue.filter('formatDateTime', formatDateTime);
+
 //处理Token===================================================================================================
 function toLogin(){
     alert("登录失效,请重新登录");

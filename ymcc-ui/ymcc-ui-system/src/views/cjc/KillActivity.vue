@@ -23,16 +23,24 @@
 			</el-table-column>
 			<el-table-column prop="name" label="活动名" width="200" >
 			</el-table-column>
-			<el-table-column prop="beginTimeStr" label="开始时间" sortable>
+			<el-table-column prop="beginTime" label="开始时间" sortable>
+        <template v-slot:default="scope">
+          <span>{{ scope.row.beginTime | formatDateTime }}</span>
+        </template>
 			</el-table-column>
-			<el-table-column prop="endTimeStr" label="结束时间" >
+			<el-table-column prop="endTime" label="结束时间" >
+        <template v-slot:default="scope">
+          <span>{{ scope.row.endTime | formatDateTime }}</span>
+        </template>
 			</el-table-column>
 			<el-table-column prop="timeStr" label="时间段" >
 			</el-table-column>
 			<el-table-column prop="killStatus" label="状态" :formatter="formatStatus" sortable width="80">
 			</el-table-column>
-			<el-table-column label="操作" width="200">
+			<el-table-column label="操作" width="400">
 				<template scope="scope">
+          <el-button size="small" @click="publish( scope.row.id)" icon="el-icon-edit" type="primary">发布</el-button>
+          <el-button size="small" @click="cancelPublish( scope.row.id)" icon="el-icon-edit" type="danger">取消发布</el-button>
 					<el-button size="small" @click="edit( scope.row)" icon="el-icon-edit" type="primary">编辑</el-button>
 <!--					<el-button size="small" @click="edit( scope.row)" icon="el-icon-edit">取消发布</el-button>-->
 					<el-button type="danger" size="small" @click="del( scope.row)" icon="el-icon-close">删除</el-button>
@@ -119,6 +127,25 @@
 			}
 		},
 		methods: {
+
+      //取消发布
+      cancelPublish(id){
+
+      },
+      //发布
+      publish(id){
+        this.$http.get("/kill/killActivity/publish/"+id)
+            .then(resp=>{
+              if (resp.data.success){
+                this.$message({ message: "发布成功", type: 'success' });
+              }else {
+                this.$message.error(resp.data.message);
+              }
+            }).catch(resp=>{
+              this.$message.error("网络错误,稍后重试");
+        })
+      },
+
 			//start 表格相关============================================================================================
 			selsChange: function (sels) {
 				this.sels = sels;
