@@ -12,6 +12,6 @@ export function formatDateTime(time) {
     // 分钟补0
     const minutes = String(date.getMinutes()).padStart(2, '0');
     // 秒数补0（可选，根据需求决定是否保留）
-    const seconds = String(date.getSeconds()).padStart(2, '0');
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    //const seconds = String(date.getSeconds()).padStart(2, '0');
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
 }

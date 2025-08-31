@@ -100,6 +100,36 @@ public class KillCourse extends Model<KillCourse> {
     @TableField("time_str")
     private String timeStr;
 
+    public String getKillStatusName(){
+        Date now = new Date();
+        if (now.before(new Date(startTime))){
+            return "未开始";
+        }
+        if (now.after(new Date(startTime)) && now.before(new Date(endTime))){
+            return "秒杀中";
+        }
+        if (now.after(new Date(endTime))){
+            return "秒杀结束";
+        }
+
+        return "秒杀出错";
+    }
+
+    public boolean isKilling(){
+        Date now = new Date();
+        if (now.after(new Date(startTime)) && now.before(new Date(endTime))){
+            return true;
+        }
+        return false;
+    }
+
+    //时间差
+    public Long getTimeDiffMill(){
+        Date now = new Date();
+        return (now.getTime()-startTime)/1000;
+    }
+
+
 
     public Long getId() {
         return id;

@@ -1361,6 +1361,7 @@
 						courseDetail:{},
 						courseId:"",
 						killId:"",
+						activityId:"",
 						killCourse:{},
 						killing:true,
 						killBtn:"nokillBtn",
@@ -1410,8 +1411,11 @@
 						_this.disabledKill();
 						//发送请求到后台获取数据
 						let param = {
-							killCourseId:this.killId,
-							killCode:this.killCourse.killCode
+							//killCourseId:this.killId, //秒杀id
+							courseId:this.courseId,
+							activityId:this.activityId,
+							//秒杀码
+							//killCode:this.killCourse.killCode
 						};
 						this.$http.post("kill/killCourse/kill",param).then(res=>{
 							let {success , message , data} = res.data;
@@ -1445,7 +1449,7 @@
 							//发送请求到后台获取数据
 
 							let res =  await axios({
-								url: "kill/killCourse/online/one/"+this.killId,
+								url: "kill/killCourse/online/one/"+this.activityId+"/"+this.courseId,
 								method: 'get'
 							});
 							if(res && res.data){
@@ -1553,6 +1557,7 @@
 					//获取参数秒杀ID，课程ID
 					var courseId = api.getQueryVariable("courseId");
 					var killId = api.getQueryVariable("killId");
+					var activityId = api.getQueryVariable("activityId");
 					//没有参数跳转首页
 					if(!courseId || !killId){
 						$.alert("非法请求");
@@ -1562,6 +1567,7 @@
 
 					this.courseId = courseId;
 					this.killId = killId;
+					this.activityId = activityId;
 					//加载课程和秒杀课程
 					this.getCourse();
 					this.schduleKillTime();

@@ -1,5 +1,6 @@
 package cn.zwh.ymcc.web.controller;
 
+import cn.zwh.ymcc.dto.KillDto;
 import cn.zwh.ymcc.service.IKillCourseService;
 import cn.zwh.ymcc.domain.KillCourse;
 import cn.zwh.ymcc.query.KillCourseQuery;
@@ -9,12 +10,42 @@ import com.baomidou.mybatisplus.plugins.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.List;
+
 @RestController
 @RequestMapping("/killCourse")
 public class KillCourseController {
 
     @Autowired
     public IKillCourseService killCourseService;
+
+    /*
+    * 立即秒杀
+    * */
+    @PostMapping("/kill")
+    public JSONResult kill(@RequestBody @Valid KillDto killDto){
+
+        String orderId =killCourseService.kill(killDto);
+        //返回一个订单号给前端
+        return JSONResult.success(orderId);
+    }
+
+    /*
+    * 根据活动id和课程id查询课程 ，redis
+    * */
+    @GetMapping("/online/one/{activityId}/{courseId}")
+    public JSONResult queryOnlineOne(@PathVariable("activityId") Long activityId, @PathVariable("courseId") Long courseId){
+        KillCourse killCourse = killCourseService.queryOnlineOne(activityId,courseId);
+        return JSONResult.success(killCourse);
+    }
+
+
+    @GetMapping("/online/all")
+    public JSONResult queryOnlineAll(){
+        List<KillCourse> killCourses =killCourseService.queryOnlineAll();
+        return JSONResult.success(killCourses);
+    }
 
     /**
     * 保存和修改公用的

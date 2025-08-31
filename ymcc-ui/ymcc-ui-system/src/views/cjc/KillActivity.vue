@@ -141,6 +141,7 @@
               }else {
                 this.$message.error(resp.data.message);
               }
+              this.getTableData();
             }).catch(resp=>{
               this.$message.error("网络错误,稍后重试");
         })

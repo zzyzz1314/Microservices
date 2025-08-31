@@ -1,5 +1,6 @@
 package cn.zwh.ymcc.web.controller;
 
+import cn.zwh.ymcc.dto.KillPlaceOrderDto;
 import cn.zwh.ymcc.dto.PlaceOrderDto;
 import cn.zwh.ymcc.dto.UpdateOrderStatusDto;
 import cn.zwh.ymcc.service.ICourseOrderService;
@@ -11,12 +12,20 @@ import com.baomidou.mybatisplus.plugins.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/courseOrder")
 public class CourseOrderController {
 
     @Autowired
     public ICourseOrderService courseOrderService;
+
+    @PostMapping("/killPlaceOrder")
+    public JSONResult killPlaceOrder(@RequestBody KillPlaceOrderDto killPlaceOrderDto){
+        String orderNo =courseOrderService.killPlaceOrder(killPlaceOrderDto);
+        return JSONResult.success(orderNo);
+    }
 
     /*
     * 根据订单号 修改订单状态

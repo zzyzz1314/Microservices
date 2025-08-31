@@ -36,9 +36,9 @@
 			</el-table-column>
 			<el-table-column prop="killCount" label="数量" width="80">
 			</el-table-column>
-			<el-table-column prop="beginTime" label="开秒时间" >
+			<el-table-column prop="startTime" label="开始时间" >
         <template v-slot:default="scope">
-          <span>{{ scope.row.beginTime | formatDateTime }}</span>
+          <span>{{ scope.row.startTime | formatDateTime }}</span>
         </template>
 			</el-table-column>
 			<el-table-column prop="endTime" label="结束时间" >
@@ -118,7 +118,7 @@
 			},
 			//性别显示转换
 			formatStatus: function (row, column) {
-				return row.killStatus == 1 ? '已发布' : row.killStatus == 0 ? '未发布' : '未知';
+				return row.publishStatus == 1 ? '已发布' : row.publishStatus == 0 ? '未发布' : '未知';
 			},
 			selectPage(val) {
 				this.page = val;

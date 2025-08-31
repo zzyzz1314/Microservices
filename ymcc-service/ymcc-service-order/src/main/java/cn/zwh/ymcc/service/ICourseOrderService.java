@@ -1,6 +1,7 @@
 package cn.zwh.ymcc.service;
 
 import cn.zwh.ymcc.domain.CourseOrder;
+import cn.zwh.ymcc.dto.KillPlaceOrderDto;
 import cn.zwh.ymcc.dto.PlaceOrderDto;
 import cn.zwh.ymcc.dto.UpdateOrderStatusDto;
 import cn.zwh.ymcc.result.JSONResult;
@@ -30,4 +31,11 @@ public interface ICourseOrderService extends IService<CourseOrder> {
     void saveOrderAndItem(CourseOrder courseOrder);
 
     JSONResult updateOrderStatus(UpdateOrderStatusDto updateOrderStatusDto);
+
+    /**
+     * 秒杀下单
+     * @param killPlaceOrderDto
+     * @return
+     */
+    String killPlaceOrder(KillPlaceOrderDto killPlaceOrderDto);
 }
