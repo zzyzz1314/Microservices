@@ -4,7 +4,11 @@ import cn.zwh.ymcc.domain.Permission;
 import cn.zwh.ymcc.mapper.PermissionMapper;
 import cn.zwh.ymcc.service.IPermissionService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * <p>
@@ -17,4 +21,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permission> implements IPermissionService {
 
+    @Autowired
+    private PermissionMapper permissionMapper;
+
+    @Override
+    public List<Permission> queryPermissionByLoginId(Long id) {
+        return permissionMapper.queryPermissionByLoginId(id);
+    }
 }

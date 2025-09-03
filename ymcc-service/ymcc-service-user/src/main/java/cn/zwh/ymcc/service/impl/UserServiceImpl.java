@@ -55,7 +55,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     @GlobalTransactional
     public void phoneRegister(RegisterParamDto registerParamDto) {
-        // 分布式事务 TODO 测试
+        // 分布式事务
         String phone = registerParamDto.getMobile();
         String password = registerParamDto.getPassword();
         String smsCode = registerParamDto.getSmsCode();

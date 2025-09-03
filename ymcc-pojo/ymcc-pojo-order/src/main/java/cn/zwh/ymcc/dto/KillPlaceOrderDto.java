@@ -11,9 +11,12 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class KillPlaceOrderDto {
 
+    @NotNull(message = "订单编号不能为空")
     private String orderNo;
 
+    @NotNull(message = "支付类型不能为空")
     private Integer payType;
 
+    @NotNull(message = "token不能为空")
     private String token;
 }

@@ -8,36 +8,38 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.validation.BindingResult;
 
 import java.net.BindException;
+import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestControllerAdvice
 public class GlobleExceptionHandler {
 
-    //拦截异常 : 这个注解就可以拦截器 GlobleException 异常
+    //拦截异常 : 这个注解就可以拦截器 GlobleBusinessException 异常
     @ExceptionHandler(GlobleBusinessException.class)
-    public JSONResult globleException(GlobleBusinessException e){
+    public JSONResult globleException(GlobleBusinessException e) {
         e.printStackTrace();
         return JSONResult.error(e.getMessage());
-        
     }
 
 
     //拦截器其他异常
     @ExceptionHandler(Exception.class)
-    public JSONResult exception(Exception e){
+    public JSONResult exception(Exception e) {
         e.printStackTrace();
         //获取e中的信息，要求输出为[用户名必填][邮箱格式不正确] 利用debug模式查看
-        //@TODO
         List<String> errorList = new ArrayList<>();
-        if (e instanceof MethodArgumentNotValidException){
+        if (e instanceof MethodArgumentNotValidException) {
             MethodArgumentNotValidException ex = (MethodArgumentNotValidException) e;
             ex.getBindingResult().getFieldErrors().forEach(fieldError -> {
                 errorList.add(fieldError.getDefaultMessage());
             });
-            return JSONResult.error(errorList.toString());
+                return JSONResult.error(errorList.toString());
         }
-
+        // detailMessage = "不允许访问！"
+        if ("不允许访问".equals(e.getMessage())) {
+            return JSONResult.error("不允许访问!");
+        }
         return JSONResult.error(ErrorCode.NETWORK_ERROR);
     }
 

@@ -206,7 +206,7 @@ public class CourseOrderServiceImpl extends ServiceImpl<CourseOrderMapper, Cours
     @Override
     public String killPlaceOrder(KillPlaceOrderDto killPlaceOrderDto) {
 
-        //1.校验 @TODO
+        //1.校验
 
         //2.验证token
         String token = killPlaceOrderDto.getToken();

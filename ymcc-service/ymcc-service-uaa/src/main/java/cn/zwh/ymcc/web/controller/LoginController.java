@@ -7,6 +7,7 @@ import cn.zwh.ymcc.result.JSONResult;
 import cn.zwh.ymcc.result.PageList;
 import com.baomidou.mybatisplus.plugins.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -57,6 +58,7 @@ public class LoginController {
     /**
     * 查询所有对象
     */
+    @PreAuthorize("hasAnyAuthority('login:list','employee:update')")
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public JSONResult list(){
         return JSONResult.success(loginService.selectList(null));

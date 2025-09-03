@@ -11,5 +11,14 @@
         <result column="menu_id" property="menuId" />
         <result column="sn" property="sn" />
     </resultMap>
-
+    <select id="queryPermissionByLoginId" resultType="cn.zwh.ymcc.domain.Permission">
+        SELECT
+            p.*
+        FROM
+            t_login_role lr
+        JOIN t_role_permission rp ON lr.role_id = rp.role_id
+        JOIN t_permission p ON rp.permission_id = p.id
+        WHERE
+            lr.login_id =#{id}
+    </select>
 </mapper>

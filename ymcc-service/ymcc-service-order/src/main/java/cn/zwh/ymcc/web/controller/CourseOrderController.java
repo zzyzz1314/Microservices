@@ -22,7 +22,7 @@ public class CourseOrderController {
     public ICourseOrderService courseOrderService;
 
     @PostMapping("/killPlaceOrder")
-    public JSONResult killPlaceOrder(@RequestBody KillPlaceOrderDto killPlaceOrderDto){
+    public JSONResult killPlaceOrder(@RequestBody @Valid KillPlaceOrderDto killPlaceOrderDto){
         String orderNo =courseOrderService.killPlaceOrder(killPlaceOrderDto);
         return JSONResult.success(orderNo);
     }
