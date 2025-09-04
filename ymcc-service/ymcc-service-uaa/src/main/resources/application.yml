@@ -24,3 +24,5 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 seata:
   enableAutoDataSourceProxy: false #关闭DataSource代理的自动配置，我们要手动配置
+ymcc:
+  authurl: "http://localhost:${server.port}/oauth/token?client_id=%s&client_secret=%s&grant_type=password&username=%s&password=%s"

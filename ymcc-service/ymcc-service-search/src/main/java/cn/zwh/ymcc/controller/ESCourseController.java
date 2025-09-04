@@ -6,6 +6,7 @@ import cn.zwh.ymcc.result.JSONResult;
 import cn.zwh.ymcc.result.PageList;
 import cn.zwh.ymcc.service.ESCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ public class ESCourseController {
     * CourseDoc 实体类
     * */
     @PostMapping("/es/save")
+    @PreAuthorize("hasAuthority('es:save')")
     public JSONResult save(@RequestBody List<CourseDoc> courseDocs) {
         esCourseService.save(courseDocs);
         return JSONResult.success();

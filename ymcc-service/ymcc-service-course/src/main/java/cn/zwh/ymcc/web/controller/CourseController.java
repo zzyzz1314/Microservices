@@ -1,5 +1,6 @@
 package cn.zwh.ymcc.web.controller;
 
+import cn.zwh.ymcc.domain.Login;
 import cn.zwh.ymcc.dto.CourseInfoDto;
 import cn.zwh.ymcc.dto.CourseSaveDto;
 import cn.zwh.ymcc.service.ICourseService;
@@ -7,14 +8,18 @@ import cn.zwh.ymcc.domain.Course;
 import cn.zwh.ymcc.query.CourseQuery;
 import cn.zwh.ymcc.result.JSONResult;
 import cn.zwh.ymcc.result.PageList;
+import cn.zwh.ymcc.utils.LoginContext;
 import cn.zwh.ymcc.vo.CourseDetailDataVo;
 import com.baomidou.mybatisplus.plugins.Page;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/course")
 public class CourseController {
@@ -35,6 +40,7 @@ public class CourseController {
     /**
      * 课程上线
      */
+    @PreAuthorize("hasAuthority('course:onLineCourse')")
     @RequestMapping(value = "/onLineCourse", method = RequestMethod.POST)
     public JSONResult onLineCourse(@RequestBody List<Long> courseIds) {
         courseService.onLineCourse(courseIds);
@@ -82,8 +88,12 @@ public class CourseController {
     /**
      * 查询所有对象
      */
+    @PreAuthorize("hasAuthority('course:list')")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public JSONResult list() {
+
+        Login login = LoginContext.getLogin();
+        log.info("当前登录人信息为:{}",login);
         return JSONResult.success(courseService.selectList(null));
     }
 
@@ -91,6 +101,7 @@ public class CourseController {
     /**
      * 带条件分页查询数据
      */
+    @PreAuthorize("hasAuthority('course:pagelist')")
     @RequestMapping(value = "/pagelist", method = RequestMethod.POST)
     public JSONResult page(@RequestBody CourseQuery query) {
         Page<Course> page = new Page<Course>(query.getPage(), query.getRows());

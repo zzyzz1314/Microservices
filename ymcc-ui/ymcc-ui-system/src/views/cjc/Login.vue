@@ -58,20 +58,10 @@
             //NProgress.start();
             var loginParams = {
                 username: this.ruleForm2.account,
-                password: this.ruleForm2.checkPass ,
+                password: this.ruleForm2.checkPass,
                 type: 0  //后台用户
             };
 
-            // 搞点假的登陆数据，返回
-            if(true){
-              localStorage.setItem("U-TOKEN","token");
-              localStorage.setItem("R-TOKEN","refresh_token");
-              localStorage.setItem("expiresTime","100000000000000000");
-              localStorage.setItem("user",'{"username":"'+this.ruleForm2.account+'"}');
-              //修改登录成功后跳转到首页
-              this.$router.push({ path: '/echarts' });
-              return ;
-            }
 
             //发起请求 http://localhost:1020/hrm/  auth/auth/oauth/token?
             this.$http.post("/uaa/login/common",loginParams).then(res=>{
@@ -80,7 +70,7 @@
                 if(res.data.success){ // jsonResult:  success: true
                     var token = res.data.data.access_token; // 获取数据token
                     var refresh_token = res.data.data.refresh_token;
-                    var expiresTime = res.data.data.expiresTime; // 过期时间
+                    var expiresTime = res.data.data.expires_in; // 过期时间
                     //把token存储起来
                     localStorage.setItem("U-TOKEN",token);
                     localStorage.setItem("R-TOKEN",refresh_token);

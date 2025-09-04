@@ -76,15 +76,15 @@ async function doRequest () {
 
 axios.interceptors.request.use(config => {
 
-    //刷新Token请求放行
+    /*//刷新Token请求放行
     if(config.url && config.url.indexOf("refresh") > 0){
         return config;
-    }
+    }*/
 
     //如果已经登录了,每次都把token作为一个请求头传递过程
     if (localStorage.getItem('U-TOKEN')) {
 
-        //自动刷新Token
+        /*//自动刷新Token
         var expiresTime = localStorage.getItem("expiresTime");
 
         let nowTime = new Date().getTime();
@@ -94,7 +94,7 @@ axios.interceptors.request.use(config => {
             console.log("Token过期或即将过期...");
             //刷新Token
             doRequest();
-        }
+        }*/
 
         // 让每个请求携带token--['X-Token']为自定义key 请根据实际情况自行修改
         config.headers['Authorization'] = "Bearer "+localStorage.getItem('U-TOKEN')

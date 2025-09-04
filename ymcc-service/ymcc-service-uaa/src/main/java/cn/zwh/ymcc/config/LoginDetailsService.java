@@ -5,6 +5,7 @@ import cn.zwh.ymcc.domain.Permission;
 import cn.zwh.ymcc.exception.GlobleBusinessException;
 import cn.zwh.ymcc.service.ILoginService;
 import cn.zwh.ymcc.service.IPermissionService;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +44,12 @@ public class LoginDetailsService implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority(permission.getSn()));
         }
 
+        Login login1 = new Login();
+        login1.setId(login.getId());
+        login1.setUsername(login.getUsername());
+
         User user = new User(
-                username,
+                JSONObject.toJSONString(login1),
                 login.getPassword(),
                 login.getEnabled(),
                 login.getAccountNonExpired(),

@@ -1,7 +1,10 @@
 package cn.zwh.ymcc.service;
 
 import cn.zwh.ymcc.domain.Login;
+import cn.zwh.ymcc.dto.LoginDto;
 import com.baomidou.mybatisplus.service.IService;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -13,4 +16,10 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface ILoginService extends IService<Login> {
 
+    /**
+     * 登录,返回 token
+     * @param loginDto
+     * @return
+     */
+    Map<String, Object> login(LoginDto loginDto);
 }

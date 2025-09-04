@@ -1,5 +1,6 @@
 package cn.zwh.ymcc.web.controller;
 
+import cn.zwh.ymcc.dto.LoginDto;
 import cn.zwh.ymcc.service.ILoginService;
 import cn.zwh.ymcc.domain.Login;
 import cn.zwh.ymcc.query.LoginQuery;
@@ -10,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/login")
 public class LoginController {
@@ -17,6 +21,18 @@ public class LoginController {
     @Autowired
     public ILoginService loginService;
 
+    /**
+    * 登录
+    */
+    @RequestMapping(value="/common",method= RequestMethod.POST)
+    public JSONResult login(@RequestBody @Valid LoginDto loginDto){
+        Map<String,Object> map =loginService.login(loginDto);
+        return JSONResult.success(map);
+    }
+
+    /**
+    * 注册
+    */
     @RequestMapping(value="/register",method= RequestMethod.POST)
     public JSONResult register(@RequestBody Login login){
         loginService.insert(login);
